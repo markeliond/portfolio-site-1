@@ -190,7 +190,7 @@ def fetch_liked_songs(youtube):
 liked_songs = fetch_liked_songs(youtube)
 ```
 
-2. **Print the Liked Songs**:
+**Print the Liked Songs**:
 
 This code retrieves and prints the details of your liked songs from YouTube.
 
