@@ -18,22 +18,45 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/nano.png" } = Astro.props;
+const { title, description, image = "/favicon-96x96.png" } = Astro.props;
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)">
+<!-- <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/x-icon" href="/favicon-light.svg">
+<link rel="icon" type="image/x-icon" href="/favicon-light.svg"> -->
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link
+  rel="icon"
+  type="image/png"
+  sizes="192x192"
+  href="/android-icon-192x192.png"
+/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/manifest.json" />
+<meta name="msapplication-TileColor" content="#ffffff" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="theme-color" content="#ffffff" />
+
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin/>
-<link rel="preload" href={inter600} as="font" type="font/woff2" crossorigin/>
-<link rel="preload" href={lora400} as="font" type="font/woff2" crossorigin/>
-<link rel="preload" href={lora600} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={inter600} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={lora400} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={lora600} as="font" type="font/woff2" crossorigin />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -57,14 +80,14 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<ViewTransitions  />
+<ViewTransitions />
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
   document.addEventListener("astro:before-swap", (e) =>
     [
       ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
-        "link[as=\"font\"]"
+        'link[as="font"]'
       ),
     ].forEach((link) => link.remove())
   );
@@ -100,13 +123,13 @@ const { title, description, image = "/nano.png" } = Astro.props;
       toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
     });
 
-    window.matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", event => {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
         if (localStorage.theme === "system") {
           toggleTheme(event.matches);
         }
-      }
-    );
+      });
 
     document.addEventListener("scroll", onScroll);
   }
@@ -133,11 +156,11 @@ const { title, description, image = "/nano.png" } = Astro.props;
     event.preventDefault();
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   }
 
-function toggleTheme(dark) {
+  function toggleTheme(dark) {
     const css = document.createElement("style");
 
     css.appendChild(
@@ -149,7 +172,7 @@ function toggleTheme(dark) {
              -ms-transition: none !important;
              transition: none !important;
           }
-        `,
+        `
       )
     );
 
@@ -161,7 +184,7 @@ function toggleTheme(dark) {
       document.documentElement.classList.remove("dark");
     }
 
-  window.getComputedStyle(css).opacity;
+    window.getComputedStyle(css).opacity;
     document.head.removeChild(css);
   }
 
